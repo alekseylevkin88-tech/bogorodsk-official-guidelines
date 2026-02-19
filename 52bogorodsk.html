@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Богородск RolePlay — Основное положение</title>
+  <style>
+    :root {
+      --bg-dark: #050814;
+      --bg-panel: #111827;
+      --bg-panel-soft: #0b1220;
+      --accent: #3b82f6;
+      --accent-soft: #60a5fa;
+      --accent-contrast: #facc15;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --danger: #f87171;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.55);
+      --transition-fast: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at top, rgba(59,130,246,0.18), transparent 60%),
+        radial-gradient(circle at bottom, rgba(15,23,42,0.9), #020617);
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(15,23,42,0.85), rgba(15,23,42,0.97)),
+        url("bg-bogorodsk.jpg") center/cover no-repeat;
+      mix-blend-mode: normal;
+      opacity: 0.65;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: -60px;
+      background:
+        radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.7));
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15,23,42,0.95),
+        rgba(15,23,42,0.88),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148,163,184,0.15);
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* логотип-квадрат убран */
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .nav-link {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border: 1px solid rgba(148,163,184,0.25);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background var(--transition-fast),
+                  transform var(--transition-fast),
+                  box-shadow var(--transition-fast),
+                  color var(--transition-fast),
+                  border-color var(--transition-fast);
+    }
+
+    .nav-link span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      box-shadow: 0 0 6px rgba(96,165,250,0.9);
+    }
+
+    .nav-link:hover {
+      background: radial-gradient(circle at top, #1e293b, #020617);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.7);
+      color: var(--text-main);
+      border-color: rgba(129,140,248,0.8);
+    }
+
+    .nav-link.active {
+      background: radial-gradient(circle at top, var(--accent), #1d4ed8);
+      color: #e5e7eb;
+      box-shadow: 0 12px 35px rgba(37,99,235,0.7);
+      border-color: rgba(191,219,254,0.8);
+    }
+
+    .nav-link.active span.dot {
+      background: var(--accent-contrast);
+      box-shadow: 0 0 10px rgba(250,204,21,0.9);
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 16px auto 10px;
+      padding: 28px 22px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .hero-left {
+      flex: 1 1 260px;
+      min-width: 260px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(to right, #e5e7eb, #93c5fd);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 440px;
+    }
+
+    .hero-tags {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-tag {
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.3);
+      background: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.5));
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      flex: 0 0 260px;
+      min-width: 240px;
+      justify-self: flex-end;
+    }
+
+    .hero-card {
+      border-radius: 24px;
+      padding: 14px 18px;
+      background: radial-gradient(circle at top, rgba(37,99,235,0.22), rgba(15,23,42,0.96));
+      border: 1px solid rgba(129,140,248,0.5);
+      box-shadow: var(--shadow-soft);
+      font-size: 12px;
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .hero-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 6px;
+    }
+
+    .hero-card span.label {
+      color: var(--text-muted);
+    }
+
+    .content {
+      max-width: 1120px;
+      margin: 0 auto 40px;
+      padding: 0 22px 26px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #111827, #020617);
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 18px;
+      border: 1px solid rgba(148,163,184,0.22);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast),
+                  box-shadow var(--transition-fast),
+                  border-color var(--transition-fast),
+                  background var(--transition-fast);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -40%;
+      right: -40%;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(37,99,235,0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 26px 60px rgba(0,0,0,0.75);
+      border-color: rgba(96,165,250,0.85);
+      background: radial-gradient(circle at top, #111827, #020617);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 10px;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .card ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: var(--text-main);
+      line-height: 1.6;
+      margin: 4px 0 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.12);
+      color: var(--accent-soft);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      box-shadow: 0 0 6px rgba(96,165,250,0.8);
+    }
+
+    .badge-danger {
+      background: rgba(248,113,113,0.05);
+      color: var(--danger);
+    }
+
+    .badge-danger .badge-dot {
+      background: var(--danger);
+      box-shadow: 0 0 6px rgba(248,113,113,0.9);
+    }
+
+    .badge-info {
+      background: rgba(56,189,248,0.06);
+      color: #7dd3fc;
+    }
+
+    .command {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      background: #020617;
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: 12px;
+      color: var(--accent-soft);
+      margin-right: 4px;
+    }
+
+    .command-desc {
+      font-size: 13px;
+      color: var(--text-main);
+      margin: 4px 0 0;
+    }
+
+    .command-example {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 18px 10px 24px;
+      border-top: 1px solid rgba(30,64,175,0.6);
+      background: linear-gradient(to top, rgba(15,23,42,0.95), rgba(15,23,42,0.85));
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero {
+        padding-top: 18px;
+      }
+      .hero-right {
+        order: -1;
+        align-self: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="nav-inner">
+    <div class="logo">
+      <div>
+        <div class="logo-text-main">Bogorodsk RolePlay</div>
+        <div class="logo-text-sub">Русский провинциальный город</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="#about" class="nav-link active"><span class="dot"></span>Город</a>
+      <a href="#geo" class="nav-link"><span class="dot"></span>География</a>
+      <a href="#history" class="nav-link"><span class="dot"></span>История</a>
+      <a href="#economy" class="nav-link"><span class="dot"></span>Экономика</a>
+      <a href="#orgs" class="nav-link"><span class="dot"></span>Организации</a>
+      <a href="#atmosphere" class="nav-link"><span class="dot"></span>Атмосфера</a>
+      <a href="#mechanics" class="nav-link"><span class="dot"></span>Механики</a>
+      <a href="#characters" class="nav-link"><span class="dot"></span>Персонажи</a>
+    </nav>
+  </div>
+</div>
+
+<!-- Герой -->
+<section class="hero" id="about">
+  <div class="hero-left">
+    <h1 class="hero-title">Богородск RolePlay</h1>
+    <p class="hero-sub">
+      Реалистичный RP‑проект о жизни в провинциальном городе Нижегородской области.
+    </p>
+    <div class="hero-tags">
+      <div class="hero-tag">Часовой пояс: UTC+3</div>
+      <div class="hero-tag">Основной язык: русский</div>
+      <div class="hero-tag">Отыгровка: медиум-хард RP</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-card-title">Игровой мир</div>
+      <div><span class="label">Локация:</span> город Богородск, Нижегородская область РФ.</div>
+      <div><span class="label">Тип:</span> провинциальный городской округ с развитой промышленностью и госструктурами.</div>
+      <div><span class="label">Сеттинг:</span> современная Россия, с упором на реальную и повседневную жизнь, работу и службу.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Контентные секции -->
+<main class="content">
+
+  <!-- География -->
+  <article class="card" id="geo">
+    <div class="badge"><span class="badge-dot"></span>Локация</div>
+    <h2 class="card-title">География Богородска</h2>
+    <p class="card-sub">Привязка к реальной карте помогает выдерживать правдоподобность маршрутов, логистики и службы.</p>
+    <ul>
+      <li>Город расположен в 29 км к юго-западу от Нижнего Новгорода, на автомобильной дороге Р125.</li>
+      <li>Ближайшая железнодорожная станция Кожевенное находится в 38 км от Нижнего Новгорода и в 3 км от пристани Дуденево на реке Оке.</li>
+      <li>Через город протекает небольшая речка Рязанка, впадающая в Кудьму — приток Волги.</li>
+    </ul>
+  </article>
+
+  <!-- История -->
+  <article class="card" id="history">
+    <div class="badge"><span class="badge-dot"></span>Хронология</div>
+    <h2 class="card-title">История города</h2>
+    <p class="card-sub">Исторический контекст задаёт характер города и мотивирует отыгрыш старых традиций и местных легенд.</p>
+    <ul>
+      <li>Первые упоминания села Богородское относятся к середине XVI века; название дано по церкви Рождества Пресвятой Богородицы на берегу Кабацкого озера.</li>
+      <li>В 1614 году по жалованной грамоте царя Михаила Романова село и близлежащие деревни были переданы в вотчину Кузьме Минину.</li>
+      <li>В 1923 году Богородское преобразовано в город Богородск.</li>
+      <li>14 сентября 1942 года Богородск получил статус города областного подчинения.</li>
+    </ul>
+  </article>
+
+  <!-- Экономика -->
+  <article class="card" id="economy">
+    <div class="badge"><span class="badge-dot"></span>Промышленность</div>
+    <h2 class="card-title">Экономика Богородска</h2>
+    <p class="card-sub">Экономическая база определяет рабочие места для персонажей и фон для RP-ситуаций.</p>
+    <p>
+      Богородск — один из старейших центров кожевенной промышленности России. В городе действуют крупные кожевенные заводы,
+      фабрики по производству галантереи и обуви, мебельный и швейно‑галантерейный комбинаты, а также швейная фабрика.
+    </p>
+  </article>
+
+  <!-- Организации -->
+  <article class="card" id="orgs">
+    <div class="badge"><span class="badge-dot"></span>Госструктуры</div>
+    <h2 class="card-title">Государственные организации</h2>
+    <p class="card-sub">Официальные RP-фракции.</p>
+    <ul>
+      <li>Прокуратура г. Богородск.</li>
+      <li>Богородский районный суд Нижегородской области.</li>
+      <li>Отдел МВД России «Богородский».</li>
+      <li>Следственный отдел СК России по г. Богородск.</li>
+      <li>Центральная районная больница г. Богородск.</li>
+      <li>Пожарно‑спасательная часть по г. Богородск.</li>
+    </ul>
+  </article>
+
+  <!-- Атмосфера -->
+  <article class="card" id="atmosphere">
+    <div class="badge badge-info"><span class="badge-dot"></span>Сеттинг</div>
+    <h2 class="card-title">Игровая атмосфера</h2>
+    <p class="card-sub">Проект держит курс на реалистичную провинциальную Россию, без карикатуры и абсурда.</p>
+    <p>
+      Действия происходят в русском провинциальном городе, где соседствуют старая застройка, промзона, спальные районы и административный центр.
+      Временная привязка — часовой пояс UTC+3 (московское время).
+    </p>
+    <p>
+      Язык общения во всех разделах проекта — русский: как в голосовых и текстовых чатах, так и в отыгровке персонажей и документации.
+    </p>
+  </article>
+
+  <!-- Механики и чат-команды -->
+  <article class="card" id="mechanics">
+    <div class="badge badge-info"><span class="badge-dot"></span>RP‑механики</div>
+    <h2 class="card-title">Чат‑команды и отыгровка</h2>
+    <p class="card-sub">Текстовые команды позволяют чётко разделять действия, описание окружения и обычный IC‑диалог.</p>
+
+    <div class="command-block">
+      <span class="command">/me</span>
+      <p class="command-desc">отыгровка действия от первого лица, показывает, что делает ваш персонаж прямо сейчас.</p>
+      <p class="command-example">Пример: <span class="command">/me</span> достал удостоверение из нагрудного кармана и развернул его перед гражданином.</p>
+    </div>
+
+    <div class="command-block" style="margin-top:10px;">
+      <span class="command">/do</span>
+      <p class="command-desc">описание действий, состояния или деталей сцены от третьего лица, фиксация того, что видно и происходит вокруг.</p>
+      <p class="command-example">Пример: <span class="command">/do</span> На форме отчётливо видны нашивки отдела и жетон с личным номером сотрудника.</p>
+    </div>
+
+    <p style="margin-top:12px;">
+      Использование этих команд обязательно в RP-ситуациях, для всех участников RP-процесса.
+    </p>
+  </article>
+
+  <!-- Персонажи и мультифрак -->
+  <article class="card" id="characters">
+    <div class="badge badge-danger"><span class="badge-dot"></span>Персонажи и фракции</div>
+    <h2 class="card-title">Правила персонажей и фракций</h2>
+    <p class="card-sub">Один игрок — один персонаж, одна судьба и одна карьера в рамках выбранной фракции.</p>
+    <p>
+      На проекте допустима отыгровка только одного игрового персонажа. После смерти персонажа игрок обязан создать нового героя
+      с другой биографией, историей, связями и карьерным путём. Запрещена «перезагрузка» того же персонажа под новым именем.
+    </p>
+    <p style="margin-top:10px;">
+      Также запрещён <strong>«мультифрак»</strong> — ситуация, когда один персонаж одновременно состоит в нескольких организациях.
+      Персонаж может принадлежать только одной фракции: например, сотрудник МВД не имеет права параллельно работать в суде, больнице
+      или другой госструктуре. Переход между фракциями допускается только через RP‑увольнение/перевод в рамках внутренних регламентов.
+    </p>
+  </article>
+
+</main>
+
+<footer class="footer">
+  Bogorodsk RolePlay
+</footer>
+
+<script>
+  // Подсветка активного пункта меню при скролле
+  const sections = document.querySelectorAll("main .card, .hero");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  function onScroll() {
+    let currentId = "about";
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= 120 && rect.bottom >= 160) {
+        currentId = sec.id || currentId;
+      }
+    });
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute("href").replace("#","");
+      link.classList.toggle("active", href === currentId);
+    });
+  }
+
+  document.addEventListener("scroll", onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>
