@@ -72,7 +72,7 @@
       gap: 18px;
     }
 
-    /* TOPBAR под стиль правил */
+    /* TOPBAR */
     .topbar {
       position: sticky;
       top: 0;
@@ -95,6 +95,11 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
     }
 
     .logo-text-main {
@@ -129,19 +134,17 @@
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      transition: background var(--transition-med),
-                  transform var(--transition-med),
-                  box-shadow var(--transition-med),
-                  color var(--transition-med),
-                  border-color var(--transition-med);
+      transition: all var(--transition-med);
+      position: relative;
     }
 
     .nav-link span.dot {
       width: 6px;
       height: 6px;
-      border-radius: 999px;
+      border-radius: 50%;
       background: var(--accent-soft);
       box-shadow: 0 0 6px rgba(96,165,250,0.9);
+      transition: all 0.3s ease;
     }
 
     .nav-link:hover {
@@ -162,9 +165,15 @@
     .nav-link.active span.dot {
       background: var(--warning);
       box-shadow: 0 0 10px rgba(250,204,21,0.9);
+      animation: pulse 1.5s infinite;
     }
 
-    /* HERO блок в стиле правил */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    /* HERO */
     .hero {
       margin-top: 12px;
       padding: 22px 18px 16px;
@@ -248,7 +257,7 @@
       color: var(--text-muted);
     }
 
-    /* Контент: liquid-glass карточки */
+    /* Glass карточки */
     .content {
       margin-top: 8px;
       display: grid;
@@ -297,6 +306,7 @@
       opacity: 0.8;
     }
 
+    /* Стили для карточек */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -314,7 +324,7 @@
     .badge-dot {
       width: 6px;
       height: 6px;
-      border-radius: 999px;
+      border-radius: 50%;
       background: var(--accent-soft);
       box-shadow: 0 0 6px rgba(96,165,250,0.8);
     }
@@ -335,13 +345,18 @@
     }
 
     .card-title {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-soft);
-      margin-bottom: 8px;
-    }
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #60a5fa !important; /* Яркий синий */
+  text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
+  margin-bottom: 12px !important;
+  position: relative;
+  z-index: 2;
+}
+
+
 
     .card-sub {
       font-size: 12px;
@@ -412,7 +427,87 @@
         align-self: stretch;
       }
     }
-  </style>
+/* МЕДЛЕННАЯ ПЛАВНАЯ АНИМАЦИЯ */
+.glass-card.target-active {
+  animation: bounceGlow 1.2s ease-out !important;
+}
+
+@keyframes bounceGlow {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--border-glass);
+  }
+  20% {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 70px rgba(78, 168, 255, 0.4);
+    border-color: rgba(78, 168, 255, 0.8);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 25px 60px rgba(78, 168, 255, 0.3);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: var(--shadow-soft);
+    border-color: var(--border-glass);
+  }
+}
+
+/* :dart: ИСПРАВЛЯЕТ БОЛЬШОЙ ТЕКСТ */
+.glass-card,
+.card-title,
+.card-sub,
+.glass-card p,
+.glass-card ul,
+.glass-card li {
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+}
+
+.card-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #60a5fa !important;
+  text-shadow: 0 2px 8px rgba(96, 165, 250, 0.4) !important;
+  margin-bottom: 12px !important;
+  line-height: 1.3 !important;
+}
+
+.glass-card ul {
+  padding-left: 20px !important;
+  margin-top: 8px !important;
+}
+
+.glass-card li {
+  margin-bottom: 6px !important;
+  font-size: 13px !important;
+}
+
+.glass-card p {
+  margin: 6px 0 !important;
+  font-size: 13px !important;
+}
+
+/* 🎯 ИСПРАВЛЯЕТ ТОЧКИ СПИСКОВ */
+.glass-card ul {
+  padding-left: 24px !important; /* Было 18px или 20px */
+}
+
+.glass-card li {
+  padding-left: 4px !important;
+  margin-bottom: 6px !important;
+  position: relative !important;
+}
+
+.glass-card li::marker {
+  content: "•" !important;
+  color: var(--accent-soft) !important;
+  font-size: 14px !important;
+  margin-right: 8px !important;
+}
+
+</style>
 </head>
 <body>
 
@@ -421,7 +516,6 @@
     <div class="logo">
       <div>
         <div class="logo-text-main">Bogorodsk RolePlay</div>
-        <div class="logo-text-sub">Русский провинциальный город</div>
       </div>
     </div>
     <nav class="nav-links">
@@ -444,12 +538,12 @@
     <div class="hero-left">
       <h1 class="hero-title">Богородск RolePlay</h1>
       <p class="hero-sub">
-        Реалистичный RP‑проект о жизни в провинциальном городе Нижегородской области.
+        RP‑проект с упором на реализм о жизни в провинциальном городе Нижегородской области.
       </p>
       <div class="hero-tags">
-        <div class="hero-tag">Часовой пояс: UTC+3</div>
-        <div class="hero-tag">Основной язык: русский</div>
-        <div class="hero-tag">Отыгровка: медиум‑хард RP</div>
+        <div class="hero-tag">Часовой пояс в игре — UTC+3</div>
+        <div class="hero-tag">Основной язык общения — русский</div>
+        <div class="hero-tag">Уровень RP-отыгровок — медиум‑хард RP</div>
       </div>
     </div>
     <div class="hero-right">
@@ -462,15 +556,13 @@
     </div>
   </section>
 
-  <!-- Контентные секции в liquid-glass -->
+  <!-- Контентные секции -->
   <main class="content">
 
     <!-- География -->
     <article class="glass-card" id="geo">
       <div class="badge"><span class="badge-dot"></span>Локация</div>
       <h2 class="card-title">География Богородска</h2>
-      <p class="card-sub">Привязка к реальной карте помогает выдерживать правдоподобность маршрутов, логистики и службы.</p>
-      <ul>
         <li>Город расположен в 29 км к юго-западу от Нижнего Новгорода, на автомобильной дороге Р125.</li>
         <li>Ближайшая железнодорожная станция Кожевенное находится в 38 км от Нижнего Новгорода и в 3 км от пристани Дуденево на реке Оке.</li>
         <li>Через город протекает небольшая речка Рязанка, впадающая в Кудьму — приток Волги.</li>
@@ -481,7 +573,6 @@
     <article class="glass-card" id="history">
       <div class="badge"><span class="badge-dot"></span>Хронология</div>
       <h2 class="card-title">История города</h2>
-      <p class="card-sub">Исторический контекст задаёт характер города и мотивирует отыгрыш старых традиций и местных легенд.</p>
       <ul>
         <li>Первые упоминания села Богородское относятся к середине XVI века; название дано по церкви Рождества Пресвятой Богородицы на берегу Кабацкого озера.</li>
         <li>В 1614 году по жалованной грамоте царя Михаила Романова село и близлежащие деревни были переданы в вотчину Кузьме Минину.</li>
@@ -530,19 +621,19 @@
       </p>
     </article>
 
-    <!-- Механики и чат-команды -->
+    <!-- Механики -->
     <article class="glass-card" id="mechanics">
       <div class="badge badge-info"><span class="badge-dot"></span>RP‑механики</div>
       <h2 class="card-title">Чат‑команды и отыгровка</h2>
       <p class="card-sub">Текстовые команды позволяют чётко разделять действия, описание окружения и обычный IC‑диалог.</p>
 
-      <div class="command-block">
+      <div style="margin-top: 8px;">
         <span class="command">/me</span>
         <p class="command-desc">отыгровка действия от первого лица, показывает, что делает ваш персонаж прямо сейчас.</p>
         <p class="command-example">Пример: <span class="command">/me</span> достал удостоверение из нагрудного кармана и развернул его перед гражданином.</p>
       </div>
 
-      <div class="command-block" style="margin-top:10px;">
+      <div style="margin-top:12px;">
         <span class="command">/do</span>
         <p class="command-desc">описание действий, состояния или деталей сцены от третьего лица, фиксация того, что видно и происходит вокруг.</p>
         <p class="command-example">Пример: <span class="command">/do</span> На форме отчётливо видны нашивки отдела и жетон с личным номером сотрудника.</p>
@@ -553,7 +644,7 @@
       </p>
     </article>
 
-    <!-- Персонажи и мультифрак -->
+    <!-- Персонажи -->
     <article class="glass-card" id="characters">
       <div class="badge badge-danger"><span class="badge-dot"></span>Персонажи и фракции</div>
       <h2 class="card-title">Правила персонажей и фракций</h2>
@@ -577,27 +668,77 @@
 </section>
 
 <script>
-  const sections = document.querySelectorAll(".glass-card, .hero");
-  const navLinks = document.querySelectorAll(".nav-link");
+const sections = document.querySelectorAll('.glass-card[id], .hero[id]');
+const navLinks = document.querySelectorAll('.nav-link');
 
-  function onScroll() {
-    let currentId = "about";
-    sections.forEach(sec => {
-      const rect = sec.getBoundingClientRect();
-      if (rect.top <= 120 && rect.bottom >= 160) {
-        currentId = sec.id || currentId;
-      }
-    });
+// Убираем активные классы
+function clearActiveStates() {
+  document.querySelectorAll('.glass-card, .hero').forEach(el => {
+    el.classList.remove('target-active');
+  });
+  navLinks.forEach(link => link.classList.remove('active'));
+}
 
-    navLinks.forEach(link => {
-      const href = link.getAttribute("href").replace("#", "");
-      link.classList.toggle("active", href === currentId);
-    });
-  }
+// Клик по навигации
+navLinks.forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetId);
+    
+    if (targetSection) {
+      clearActiveStates();
+      
+      // Подсвечиваем меню
+      link.classList.add('active');
+      
+      // АНИМАЦИЯ КАРТОЧКИ
+      targetSection.classList.add('target-active');
+      
+      // Плавная прокрутка
+      const topbarHeight = 70;
+      const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - topbarHeight;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Убираем анимацию через 1 сек
+setTimeout(() => {
+  targetSection.classList.remove('target-active');
+}, 1400);  // Стало 1400 (1.4 секунды)
 
-  document.addEventListener("scroll", onScroll);
-  onScroll();
+    }
+  });
+});
+
+// Автоподсветка при скролле
+function updateActiveNav() {
+  let currentId = 'about';
+  let maxVisibleHeight = 0;
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    const visibleHeight = Math.max(0, rect.bottom - Math.max(0, rect.top));
+    
+    if (visibleHeight > maxVisibleHeight && visibleHeight > 100) {
+      maxVisibleHeight = visibleHeight;
+      currentId = section.id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href').substring(1);
+    link.classList.toggle('active', href === currentId);
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav);
+window.addEventListener('resize', updateActiveNav);
+updateActiveNav();
 </script>
+
 
 </body>
 </html>
